@@ -1,4 +1,5 @@
 import { Color } from "@raycast/api";
+import fetch from "node-fetch";
 
 export function getColorScale(change: number): string {
   const c = Math.abs(change / 10);
@@ -6,4 +7,35 @@ export function getColorScale(change: number): string {
     return Color.PrimaryText;
   if (change > 0) return Color.Red;
   return Color.Green;
+}
+
+export function parseTickerQuery(q: string) {
+  const fiats = ["gbp", "usd", "eur", "sgd", "vnd"];
+  q = q.toLowerCase();
+  let isCompare = false;
+  let isFiat = false;
+  let [base, target] = q.split("/");
+  if (target) {
+    isCompare = true;
+    isFiat = fiats.includes(base) && fiats.includes(target);
+  } else {
+    const fiatBase = fiats.find((f) => q.startsWith(f));
+    if (fiatBase) {
+      const fiatTarget =
+        q.substring(fiatBase.length) || "usd";
+      isFiat =
+        fiats.includes(fiatBase) &&
+        fiats.includes(fiatTarget);
+      base = isFiat ? fiatBase : q;
+      target = isFiat ? fiatTarget : "";
+      isCompare = isFiat;
+    }
+  }
+  return { isCompare, isFiat, base, target };
+}
+
+export async function searchCoins(query: string) {
+  return await fetch(
+    `https://api.mochi.pod.town/api/v1/defi/coins?query=${query}`
+  );
 }

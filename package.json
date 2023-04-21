@@ -18,6 +18,20 @@
       "title": "Tokens",
       "description": "Lists all tokens",
       "mode": "view"
+    },
+    {
+      "name": "ticker",
+      "title": "Ticker",
+      "description": "Shows information about a ticker",
+      "mode": "view",
+      "arguments": [
+        {
+          "name": "base",
+          "placeholder": "Symbol/Base_Target",
+          "type": "text",
+          "required": true
+        }
+      ]
     }
   ],
   "dependencies": {
