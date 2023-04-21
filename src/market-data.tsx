@@ -91,10 +91,19 @@ export default function Command() {
               />
             }
             actions={
-              <ActionPanel title="#1 in raycast/extensions">
+              <ActionPanel>
                 <Action.CopyToClipboard
                   title="Copy the name"
                   content={coin.name}
+                />
+                <Action
+                  title="Add to watchlist"
+                  style={Action.Style.Regular}
+                  onAction={() =>
+                    console.log(
+                      "Update the list to include this new coin too"
+                    )
+                  }
                 />
               </ActionPanel>
             }
