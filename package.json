@@ -10,12 +10,20 @@
     {
       "name": "hello",
       "title": "hello",
-      "description": "",
+      "description": "Jjust the start",
+      "mode": "view"
+    },
+    {
+      "name": "what",
+      "title": "what",
+      "description": "How does this look?",
       "mode": "view"
     }
   ],
   "dependencies": {
-    "@raycast/api": "^1.49.3"
+    "@raycast/api": "^1.49.3",
+    "@raycast/utils": "^1.5.2",
+    "node-fetch": "^3.3.1"
   },
   "devDependencies": {
     "@raycast/eslint-config": "1.0.5",
