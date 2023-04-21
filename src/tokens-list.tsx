@@ -1,6 +1,13 @@
-import { List, showToast, Toast } from "@raycast/api";
+import {
+  Action,
+  ActionPanel,
+  List,
+  showToast,
+  Toast,
+} from "@raycast/api";
 import fetch from "node-fetch";
 import { useEffect, useState } from "react";
+import { getColorScale } from "./helpers";
 
 export default function Command() {
   const [state, setState] = useState<any>();
@@ -12,15 +19,12 @@ export default function Command() {
         setLoading(true);
         const data: any = await (
           await fetch(
-            "https://api.mochi.pod.town/api/v1/defi/market-data"
+            "https://api.mochi.pod.town/api/v1/defi/tokens"
           )
         ).json();
+
         if (data.data) {
-          const filteredData = data.data.filter((i: any) =>
-            ["busd", "usdc", "usdt", "dai", "sol"].includes(
-              i.symbol.toLowerCase()
-            )
-          );
+          const filteredData = data.data.data;
 
           await showToast({
             style: Toast.Style.Success,
@@ -52,7 +56,15 @@ export default function Command() {
           <List.Item
             key={index}
             title={coin.name}
-            subtitle={coin.symbol}
+            subtitle={coin.address}
+            actions={
+              <ActionPanel title="#1 in raycast/extensions">
+                <Action.OpenInBrowser
+                  url={`https://www.coingecko.com/en/coins/${coin.coin_gecko_id}`}
+                  title="Check out in Coingecko"
+                />
+              </ActionPanel>
+            }
           />
         );
       })}

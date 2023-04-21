@@ -8,15 +8,15 @@
   "license": "MIT",
   "commands": [
     {
-      "name": "hello",
-      "title": "hello",
-      "description": "Jjust the start",
+      "name": "market-data",
+      "title": "Market Data",
+      "description": "Shows the Market data",
       "mode": "view"
     },
     {
-      "name": "what",
-      "title": "what",
-      "description": "How does this look?",
+      "name": "tokens-list",
+      "title": "Tokens",
+      "description": "Lists all tokens",
       "mode": "view"
     }
   ],
