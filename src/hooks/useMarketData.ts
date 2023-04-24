@@ -1,6 +1,11 @@
-import { Toast, showToast } from "@raycast/api";
+import {
+  LocalStorage,
+  Toast,
+  showToast,
+} from "@raycast/api";
 import { useFetch } from "@raycast/utils";
 import { useEffect, useState } from "react";
+import useLocalStorage from "./useLocalStorage";
 
 export default function useMarketData() {
   const { data, isLoading, mutate, revalidate, error } =
@@ -10,13 +15,22 @@ export default function useMarketData() {
 
   const [filteredData, setFilteredData] = useState<any>();
 
+  const { data: favTokenList } = useLocalStorage("favList");
+
   useEffect(() => {
     async function fetchData() {
       try {
         if (data.data) {
-          const processedData = data.data.filter((i: any) =>
+          let processedData = data.data.filter((i: any) =>
             ["busd", "usdc", "usdt", "dai", "sol"].includes(
               i.symbol.toLowerCase()
+            )
+          );
+
+          // Fetch Favourite tokens as well
+          processedData.concat(
+            data.data.filter((i: any) =>
+              favTokenList.includes(i.symbol.toLowerCase())
             )
           );
 
@@ -35,7 +49,7 @@ export default function useMarketData() {
       }
     }
     fetchData();
-  }, []);
+  }, [favTokenList]);
 
   return {
     filteredData,
