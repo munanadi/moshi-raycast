@@ -11,6 +11,7 @@ import useTokens from "../hooks/useTokens";
 import useDebounce from "../hooks/useDebounce";
 import { useEffect, useState } from "react";
 import { Icon } from "@raycast/api";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 export default function AddTokensToList() {
   const [searchText, setSearchText] = useState("");
@@ -20,6 +21,7 @@ export default function AddTokensToList() {
   const debouncedSearchText = useDebounce(searchText, 1000);
 
   const { tokenIdMap } = useTokens();
+  const { data, storeData } = useLocalStorage("favList");
 
   useEffect(() => {
     setLoading(true);
@@ -51,7 +53,7 @@ export default function AddTokensToList() {
     >
       {tokensArr?.map((token: any) => (
         <List.Item
-          key={token.id}
+          key={token.symbol}
           title={token.name}
           accessories={[
             {
@@ -66,31 +68,7 @@ export default function AddTokensToList() {
               <Action
                 title="Add to Favourites"
                 onAction={async () => {
-                  let oldFavList =
-                    await LocalStorage.getItem<LocalStorage.Value>(
-                      "favList"
-                    );
-                  await showToast({
-                    style: Toast.Style.Success,
-                    title: "Added to Favourites",
-                  });
-                  console.log(
-                    `${token.name} is added to list`
-                  );
-
-                  let newFavList: string[] = [];
-                  if (oldFavList) {
-                    newFavList = [
-                      ...JSON.parse(oldFavList.toString()),
-                      token.name,
-                    ];
-                  }
-                  newFavList.push(token.name);
-
-                  await LocalStorage.setItem(
-                    "favList",
-                    JSON.stringify(newFavList)
-                  );
+                  await storeData(token.symbol.toLowerCase());
                 }}
               />
             </ActionPanel>
