@@ -33,9 +33,3 @@ export function parseTickerQuery(q: string) {
   }
   return { isCompare, isFiat, base, target };
 }
-
-export async function searchCoins(query: string) {
-  return await fetch(
-    `https://api.mochi.pod.town/api/v1/defi/coins?query=${query}`
-  );
-}
