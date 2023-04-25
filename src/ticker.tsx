@@ -9,9 +9,12 @@ import {
   useNavigation,
   popToRoot,
 } from "@raycast/api";
-import { parseTickerQuery } from "./helpers";
+import { getColorScale, parseTickerQuery } from "./helpers";
 import { useEffect } from "react";
 import { useFetch } from "@raycast/utils";
+import useTickerData from "./hooks/useTickerData";
+import NotCompare from "./components/NotCompare";
+import NotFiat from "./components/NotFiat";
 
 interface TickerArgs {
   base: string;
@@ -34,17 +37,18 @@ export default function Command(
           title: "Base and Target cannot be same",
         });
 
-        // TODO: Navigate back to search thing
+        popToRoot({
+          clearSearchBar: false,
+        });
       }
     };
   }, [base, target]);
 
   if (!isCompare) {
-    // return <NotCompare base="hello" />;
     return <NotCompare base={base} />;
   }
   if (!isFiat) {
-    return <Detail markdown={`isFiat not true`} />;
+    return <NotFiat base={base} target={target} />;
   }
   if (isFiat) {
     return <Detail markdown={`isFiat true`} />;
@@ -54,31 +58,3 @@ export default function Command(
     <Detail markdown={`Hello you have entered ${base}`} />
   );
 }
-
-const NotCompare = (props: any) => {
-  const { isLoading, data, revalidate } = useFetch<any>(
-    `https://api.mochi.pod.town/api/v1/defi/coins?query=${props.base}`
-  );
-
-  if (!data || !data.length) {
-    // No Tokens like this exists
-    console.log("handle this");
-  }
-
-  console.log(data);
-
-  return (
-    <Detail
-      isLoading={isLoading}
-      markdown={JSON.stringify(data)}
-      actions={
-        <ActionPanel>
-          <Action
-            title="Reload"
-            onAction={() => revalidate()}
-          />
-        </ActionPanel>
-      }
-    />
-  );
-};
