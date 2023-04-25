@@ -11,6 +11,7 @@ const NotFiat = ({
   target: string;
 }) => {
   const [suggest, setSuggest] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [baseCoinSuggestions, setBaseCoinSuggestions] =
     useState<any>();
   const [targetCoinSuggestions, setTargetCoinSuggestions] =
@@ -20,11 +21,12 @@ const NotFiat = ({
   const [selectedTarget, setSelectedTarget] =
     useState<any>();
 
-  const [data, setData] = useState();
+  const [currentRatio, setCurrentRatio] = useState();
 
   useEffect(() => {
     (async () => {
       setSuggest(false);
+      setLoading(true);
       const compare = await axios.get(
         `https://api.mochi.pod.town/api/v1/defi/coins/compare?base=${
           selectedBase ?? base
@@ -40,27 +42,41 @@ const NotFiat = ({
       // multiple resutls found
       // Push a new picker page to pick which coin.
       if (!selectedBase || !selectedTarget) {
+        setLoading(false);
         setSuggest(true);
         setBaseCoinSuggestions(base_coin_suggestions);
         setTargetCoinSuggestions(target_coin_suggestions);
         return;
       }
 
-      console.log("Reached here? ", compareData);
-      setData(compareData.toString());
+      setLoading(false);
+
+      const {
+        times,
+        ratios,
+        from,
+        to,
+        base_coin,
+        target_coin,
+      } = compareData;
+
+      const currRatio = ratios?.[ratios?.length - 1] ?? 0;
+      setCurrentRatio(currRatio);
+
+      // TODO: Draw a chart out here
     })();
   }, [base, target, selectedBase, selectedTarget]);
 
-  console.log(selectedBase, " is the selected base coin");
-  console.log(
-    selectedTarget,
-    " is the selected target coin"
-  );
-
   return !suggest ? (
-    <Detail markdown={`${base} ${target} inputs`} />
+    <Detail
+      isLoading={loading}
+      markdown={`${base} ${target} inputs
+      
+      current ratio is${currentRatio}`}
+    />
   ) : (
     <Detail
+      isLoading={loading}
       markdown={
         "Found multiple base options. Select Please?"
       }
