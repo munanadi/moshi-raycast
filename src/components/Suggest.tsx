@@ -1,40 +1,53 @@
-import { ActionPanel, Form, Action } from "@raycast/api";
+import {
+  ActionPanel,
+  Form,
+  Action,
+  useNavigation,
+} from "@raycast/api";
 import { useState } from "react";
 
-export default function Suggest() {
-  const [programmingLanguage, setProgrammingLanguage] =
-    useState<string>("typescript");
+export default function Suggest({
+  title,
+  base,
+  prompt,
+  suggestions,
+  setSelectedValue,
+}: any) {
+  const { pop } = useNavigation();
+
+  const [baseCoin, setBaseCoin] = useState<any>("");
 
   return (
-    <Form
-      actions={
-        <ActionPanel>
-          <Action.SubmitForm
-            title="Submit Favorite"
-            onSubmit={(values) => console.log(values)}
-          />
-        </ActionPanel>
-      }
-    >
-      <Form.Dropdown
-        id="dropdown"
-        title="Favorite Language"
-        value={programmingLanguage}
-        onChange={setProgrammingLanguage}
+    suggestions && (
+      <Form
+        actions={
+          <ActionPanel>
+            <Action.SubmitForm
+              title={prompt}
+              onSubmit={(values) => {
+                // console.log(values, " selected");
+                setSelectedValue(values[title]);
+                pop();
+              }}
+            />
+          </ActionPanel>
+        }
       >
-        <Form.Dropdown.Item value="cpp" title="C++" />
-        <Form.Dropdown.Item
-          value="javascript"
-          title="JavaScript"
-        />
-        <Form.Dropdown.Item value="ruby" title="Ruby" />
-        <Form.Dropdown.Item value="python" title="Python" />
-        <Form.Dropdown.Item value="swift" title="Swift" />
-        <Form.Dropdown.Item
-          value="typescript"
-          title="TypeScript"
-        />
-      </Form.Dropdown>
-    </Form>
+        <Form.Dropdown
+          id={title}
+          title={prompt}
+          value={baseCoin}
+          onChange={setBaseCoin}
+        >
+          {suggestions?.map((coin: any) => (
+            <Form.Dropdown.Item
+              key={coin.id}
+              value={coin.id}
+              title={coin.name}
+            />
+          ))}
+        </Form.Dropdown>
+      </Form>
+    )
   );
 }

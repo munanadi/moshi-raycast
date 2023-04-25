@@ -1,11 +1,5 @@
-import {
-  Action,
-  ActionPanel,
-  Detail,
-  useNavigation,
-} from "@raycast/api";
-import useTickerData from "../hooks/useTickerData";
-import { useEffect } from "react";
+import { Action, ActionPanel, Detail } from "@raycast/api";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import Suggest from "./Suggest";
 
@@ -16,95 +10,91 @@ const NotFiat = ({
   base: string;
   target: string;
 }) => {
-  const { push } = useNavigation();
+  const [suggest, setSuggest] = useState<boolean>(false);
+  const [baseCoinSuggestions, setBaseCoinSuggestions] =
+    useState<any>();
+  const [targetCoinSuggestions, setTargetCoinSuggestions] =
+    useState<any>();
+
+  const [selectedBase, setSelectedBase] = useState<any>();
+  const [selectedTarget, setSelectedTarget] =
+    useState<any>();
+
+  const [data, setData] = useState();
 
   useEffect(() => {
     (async () => {
+      setSuggest(false);
       const compare = await axios.get(
-        `https://api.mochi.pod.town/api/v1/defi/coins/compare?base=${base}&target=${target}&interval=${1}`
+        `https://api.mochi.pod.town/api/v1/defi/coins/compare?base=${
+          selectedBase ?? base
+        }&target=${selectedTarget ?? target}&interval=${1}`
       );
-      const compareData = compare.data;
+      const compareData = compare.data.data;
 
       const {
         base_coin_suggestions,
         target_coin_suggestions,
       } = compareData;
+
       // multiple resutls found
       // Push a new picker page to pick which coin.
-      if (
-        base_coin_suggestions ||
-        target_coin_suggestions
-      ) {
-        return (
-          <Detail
-            markdown="Found many possiblities"
-            actions={
-              <ActionPanel>
-                <Action
-                  title="Push"
-                  onAction={() => push(<Suggest />)}
-                />
-              </ActionPanel>
-            }
-          />
-        );
-
-        // return suggest(
-        //   base_coin_suggestions,
-        //   target_coin_suggestions,
-        //   base,
-        //   target
-        // )
+      if (!selectedBase || !selectedTarget) {
+        setSuggest(true);
+        setBaseCoinSuggestions(base_coin_suggestions);
+        setTargetCoinSuggestions(target_coin_suggestions);
+        return;
       }
 
-      console.log(compareData);
+      console.log("Reached here? ", compareData);
+      setData(compareData.toString());
     })();
-  }, [base, target]);
+  }, [base, target, selectedBase, selectedTarget]);
 
-  return <Detail markdown={`${base} ${target} inputs`} />;
+  console.log(selectedBase, " is the selected base coin");
+  console.log(
+    selectedTarget,
+    " is the selected target coin"
+  );
 
-  const {
-    marketCap,
-    marketPrice,
-    symbol,
-    name,
-    marketRank,
-    loading,
-  } = useTickerData(props.base);
-
-  console.log(loading, marketPrice);
-
-  const markdown = `
-# ${name} ${symbol}
-`;
-
-  return (
+  return !suggest ? (
+    <Detail markdown={`${base} ${target} inputs`} />
+  ) : (
     <Detail
-      isLoading={loading && !marketPrice}
-      markdown={markdown}
-      metadata={
-        <Detail.Metadata>
-          <Detail.Metadata.Label
-            title="Market Cap"
-            text={`$${marketCap?.toString()}`}
-          />
-          <Detail.Metadata.Label
-            title="Market Price"
-            text={`$${marketPrice?.toString()}`}
-          />
-          <Detail.Metadata.TagList title="Market Rank">
-            <Detail.Metadata.TagList.Item
-              text={`# ${marketRank?.toString()}`}
-              color={"#eed535"}
+      markdown={
+        "Found multiple base options. Select Please?"
+      }
+      actions={
+        <ActionPanel>
+          {!selectedBase && (
+            <Action.Push
+              title="Select base options"
+              target={
+                <Suggest
+                  prompt={"Select base coin"}
+                  title={"Base Coin"}
+                  base={base}
+                  suggestions={baseCoinSuggestions}
+                  setSelectedValue={setSelectedBase}
+                />
+              }
             />
-          </Detail.Metadata.TagList>
-          <Detail.Metadata.Separator />
-          <Detail.Metadata.Link
-            title="View in Coingecko"
-            target={`https://www.coingecko.com/en/coins/${name?.toLowerCase()}`}
-            text="Link"
-          />
-        </Detail.Metadata>
+          )}
+          {!selectedTarget && (
+            <Action.Push
+              title="Select target options"
+              target={
+                <Suggest
+                  prompt={"Select target coin"}
+                  title={"Target Coin"}
+                  base={base}
+                  suggestions={targetCoinSuggestions}
+                  setSelectedValue={setSelectedTarget}
+                />
+              }
+            />
+          )}
+        </ActionPanel>
       }
     />
   );
