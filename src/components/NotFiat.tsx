@@ -62,8 +62,6 @@ const NotFiat = ({
 
       const currRatio = ratios?.[ratios?.length - 1] ?? 0;
       setCurrentRatio(currRatio);
-
-      // TODO: Draw a chart out here
     })();
   }, [base, target, selectedBase, selectedTarget]);
 
