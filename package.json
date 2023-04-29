@@ -20,6 +20,18 @@
       "mode": "view"
     },
     {
+      "name": "watchlist",
+      "title": "Watchlist",
+      "description": "Shows Marketdata at a glance",
+      "mode": "view"
+    },
+    {
+      "name": "heatmap",
+      "title": "Heatmap",
+      "description": "Shows Market as a Heatmap",
+      "mode": "view"
+    },
+    {
       "name": "tokens-list",
       "title": "Tokens",
       "description": "Lists all tokens",
@@ -34,6 +46,32 @@
         {
           "name": "base",
           "placeholder": "Symbol/Base_Target",
+          "type": "text",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "convert",
+      "title": "Convert",
+      "description": "Convert between two different tokens",
+      "mode": "view",
+      "arguments": [
+        {
+          "name": "amount",
+          "placeholder": "2.0",
+          "type": "text",
+          "required": true
+        },
+        {
+          "name": "from",
+          "placeholder": "SOL",
+          "type": "text",
+          "required": true
+        },
+        {
+          "name": "to",
+          "placeholder": "ETH",
           "type": "text",
           "required": true
         }
