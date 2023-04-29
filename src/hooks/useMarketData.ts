@@ -21,11 +21,12 @@ export default function useMarketData() {
     async function fetchData() {
       try {
         if (data.data) {
-          let processedData = data.data.filter((i: any) =>
-            ["busd", "usdc", "usdt", "dai", "sol"].includes(
-              i.symbol.toLowerCase()
-            )
-          );
+          // let processedData = data.data.filter((i: any) =>
+          //   ["busd", "usdc", "usdt", "dai", "sol"].includes(
+          //     i.symbol.toLowerCase()
+          //   )
+          // );
+          let processedData = data.data;
 
           // Fetch Favourite tokens as well
           processedData.concat(

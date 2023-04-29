@@ -5,7 +5,7 @@ import {
   showToast,
   Toast,
 } from "@raycast/api";
-import fetch from "node-fetch";
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { getColorScale } from "./helpers";
 
@@ -18,10 +18,10 @@ export default function Command() {
       try {
         setLoading(true);
         const data: any = await (
-          await fetch(
+          await axios.get(
             "https://api.mochi.pod.town/api/v1/defi/tokens"
           )
-        ).json();
+        ).data;
 
         if (data.data) {
           const filteredData = data.data.data;
