@@ -1,0 +1,112 @@
+{
+  "data": {
+    "coins": [
+      {
+        "item": {
+          "id": "chaingpt",
+          "coin_id": 29306,
+          "name": "ChainGPT",
+          "symbol": "CGPT",
+          "market_cap_rank": 778,
+          "thumb": "https://assets.coingecko.com/coins/images/29306/thumb/200x200.png?1677992972",
+          "small": "https://assets.coingecko.com/coins/images/29306/small/200x200.png?1677992972",
+          "large": "https://assets.coingecko.com/coins/images/29306/large/200x200.png?1677992972",
+          "slug": "chaingpt",
+          "price_btc": 0.000007716882003789639,
+          "score": 0
+        }
+      },
+      {
+        "item": {
+          "id": "pepe",
+          "coin_id": 29850,
+          "name": "Pepe",
+          "symbol": "PEPE",
+          "market_cap_rank": 92,
+          "thumb": "https://assets.coingecko.com/coins/images/29850/thumb/pepe-token.jpeg?1682922725",
+          "small": "https://assets.coingecko.com/coins/images/29850/small/pepe-token.jpeg?1682922725",
+          "large": "https://assets.coingecko.com/coins/images/29850/large/pepe-token.jpeg?1682922725",
+          "slug": "pepe",
+          "price_btc": 4.313836596617382e-11,
+          "score": 1
+        }
+      },
+      {
+        "item": {
+          "id": "bitcoin",
+          "coin_id": 1,
+          "name": "Bitcoin",
+          "symbol": "BTC",
+          "market_cap_rank": 1,
+          "thumb": "https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png?1547033579",
+          "small": "https://assets.coingecko.com/coins/images/1/small/bitcoin.png?1547033579",
+          "large": "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579",
+          "slug": "bitcoin",
+          "price_btc": 1,
+          "score": 2
+        }
+      },
+      {
+        "item": {
+          "id": "wojak",
+          "coin_id": 29856,
+          "name": "Wojak",
+          "symbol": "WOJAK",
+          "market_cap_rank": 762,
+          "thumb": "https://assets.coingecko.com/coins/images/29856/thumb/wojak.png?1681821640",
+          "small": "https://assets.coingecko.com/coins/images/29856/small/wojak.png?1681821640",
+          "large": "https://assets.coingecko.com/coins/images/29856/large/wojak.png?1681821640",
+          "slug": "wojak",
+          "price_btc": 9.70982309355214e-9,
+          "score": 3
+        }
+      },
+      {
+        "item": {
+          "id": "zoid-pay",
+          "coin_id": 16813,
+          "name": "ZoidPay",
+          "symbol": "ZPAY",
+          "market_cap_rank": 615,
+          "thumb": "https://assets.coingecko.com/coins/images/16813/thumb/zpay.png?1647693485",
+          "small": "https://assets.coingecko.com/coins/images/16813/small/zpay.png?1647693485",
+          "large": "https://assets.coingecko.com/coins/images/16813/large/zpay.png?1647693485",
+          "slug": "zoid-pay",
+          "price_btc": 0.000002625120416422059,
+          "score": 4
+        }
+      },
+      {
+        "item": {
+          "id": "tominet",
+          "coin_id": 28730,
+          "name": "tomiNet",
+          "symbol": "TOMI",
+          "market_cap_rank": 195,
+          "thumb": "https://assets.coingecko.com/coins/images/28730/thumb/logo_for_token.png?1673690005",
+          "small": "https://assets.coingecko.com/coins/images/28730/small/logo_for_token.png?1673690005",
+          "large": "https://assets.coingecko.com/coins/images/28730/large/logo_for_token.png?1673690005",
+          "slug": "tominet",
+          "price_btc": 0.00010770892033518979,
+          "score": 5
+        }
+      },
+      {
+        "item": {
+          "id": "arbitrum",
+          "coin_id": 16547,
+          "name": "Arbitrum",
+          "symbol": "ARB",
+          "market_cap_rank": 37,
+          "thumb": "https://assets.coingecko.com/coins/images/16547/thumb/photo_2023-03-29_21.47.00.jpeg?1680097630",
+          "small": "https://assets.coingecko.com/coins/images/16547/small/photo_2023-03-29_21.47.00.jpeg?1680097630",
+          "large": "https://assets.coingecko.com/coins/images/16547/large/photo_2023-03-29_21.47.00.jpeg?1680097630",
+          "slug": "arbitrum",
+          "price_btc": 0.000047078759754786474,
+          "score": 6
+        }
+      }
+    ],
+    "exchanges": []
+  }
+}

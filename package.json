@@ -38,6 +38,12 @@
       "mode": "view"
     },
     {
+      "name": "trending",
+      "title": "Trending",
+      "description": "Shows information of trending tokens",
+      "mode": "view"
+    },
+    {
       "name": "ticker",
       "title": "Ticker",
       "description": "Shows information about a ticker",
