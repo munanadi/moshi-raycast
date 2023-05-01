@@ -23,6 +23,8 @@ declare namespace Preferences {
   export type Heatmap = ExtensionPreferences & {}
   /** Preferences accessible in the `tokens-list` command */
   export type TokensList = ExtensionPreferences & {}
+  /** Preferences accessible in the `gainer-loser` command */
+  export type GainerLoser = ExtensionPreferences & {}
   /** Preferences accessible in the `trending` command */
   export type Trending = ExtensionPreferences & {}
   /** Preferences accessible in the `ticker` command */
@@ -42,6 +44,8 @@ declare namespace Arguments {
   export type Heatmap = {}
   /** Arguments passed to the `tokens-list` command */
   export type TokensList = {}
+  /** Arguments passed to the `gainer-loser` command */
+  export type GainerLoser = {}
   /** Arguments passed to the `trending` command */
   export type Trending = {}
   /** Arguments passed to the `ticker` command */
