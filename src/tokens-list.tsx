@@ -58,7 +58,7 @@ export default function Command() {
             title={coin.name}
             subtitle={coin.address}
             actions={
-              <ActionPanel title="#1 in raycast/extensions">
+              <ActionPanel title="More Actions">
                 <Action.OpenInBrowser
                   url={`https://www.coingecko.com/en/coins/${coin.coin_gecko_id}`}
                   title="Check out in Coingecko"
