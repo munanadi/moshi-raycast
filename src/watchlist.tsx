@@ -2,21 +2,43 @@ import {
   Action,
   ActionPanel,
   Detail,
-  LaunchProps,
+  Toast,
+  showToast,
 } from "@raycast/api";
 import WatchlistActions from "./components/WatchlistActions";
+import { useEffect } from "react";
+import { useFetch } from "@raycast/utils";
 
 const Command = () => {
-  /* 
-    1. Hit the API and get FUNCTION/market-data API and get the chart src
-    2. display a loading spinner until it prepares the chart
-    3. Displayt the chat data.
-  */
+  const {
+    data: fetchedData,
+    isLoading,
+    error,
+  } = useFetch<any>(
+    "https://elegant-phoenix-680f0e.netlify.app/.netlify/functions/renderWatchlist"
+  );
 
-  let markdown = `<img height="345" src="/Users/aadhi/Desktop/chart.png"/>`;
+  const data = JSON.parse(fetchedData ?? "{}");
+
+  useEffect(() => {
+    (async () => {
+      if (error || !data?.file_url) {
+        await showToast({
+          style: Toast.Style.Failure,
+          title: "Fetching data went wrong",
+        });
+      }
+    })();
+  }, [error, data]);
+
+  const markdown =
+    isLoading || !data?.file_url
+      ? `# Fetching data...`
+      : `<img alt="heatmap" height="345" src="${data.file_url}">`;
 
   return (
     <Detail
+      isLoading={isLoading}
       markdown={markdown}
       actions={
         <ActionPanel title="Watchlist Actions">
@@ -24,18 +46,6 @@ const Command = () => {
             title="View watchlsit"
             target={<WatchlistActions />}
           />
-          {/* <Action
-            title="Add to watchlsit"
-            onAction={() => {
-              console.log("Add this to watchilist");
-            }}
-          />
-          <Action
-            title="Remove from watchlsit"
-            onAction={() => {
-              console.log("Remove from watchilist");
-            }}
-          /> */}
         </ActionPanel>
       }
     />

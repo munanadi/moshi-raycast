@@ -1,35 +1,13 @@
 import {
   Action,
   ActionPanel,
-  Detail,
   List,
   showToast,
 } from "@raycast/api";
-import { title } from "process";
 import { useEffect } from "react";
 
 // Mock watchlist, Fetch and Store this in LocalStorage later
 const DEFAULT_LIST = [
-  {
-    id: "bitcoin",
-    name: "Bitcoin",
-    symbol: "btc",
-    current_price: 28067,
-    image:
-      "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579",
-    market_cap: 543343630108,
-    market_cap_rank: 1,
-    sparkline_in_7d: { price: null },
-    price_change_percentage_24h: -2.75371,
-    price_change_percentage_7d_in_currency:
-      -7.690260976773211,
-    price_change_percentage_1h_in_currency:
-      -0.45796882196871846,
-    price_change_percentage_24h_in_currency:
-      -2.753706597217906,
-    is_pair: false,
-    is_default: false,
-  },
   {
     id: "ethereum",
     name: "Ethereum",
@@ -85,26 +63,6 @@ const DEFAULT_LIST = [
     price_change_percentage_1h_in_currency:
       -0.039900265530247794,
     price_change_percentage_24h_in_currency: 0.02033468592675822,
-    is_pair: false,
-    is_default: false,
-  },
-  {
-    id: "matic-network",
-    name: "Polygon",
-    symbol: "matic",
-    current_price: 1.044,
-    image:
-      "https://assets.coingecko.com/coins/images/4713/large/matic-token-icon.png?1624446912",
-    market_cap: 9635654581,
-    market_cap_rank: 10,
-    sparkline_in_7d: { price: null },
-    price_change_percentage_24h: -4.33405,
-    price_change_percentage_7d_in_currency:
-      -8.037674074109832,
-    price_change_percentage_1h_in_currency:
-      -0.43963867443601634,
-    price_change_percentage_24h_in_currency:
-      -4.334046609574784,
     is_pair: false,
     is_default: false,
   },

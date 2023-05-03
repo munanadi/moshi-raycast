@@ -11,7 +11,7 @@ const Command = () => {
     "https://elegant-phoenix-680f0e.netlify.app/.netlify/functions/renderHeatmap"
   );
 
-  const data = JSON.parse(fetchedData);
+  const data = JSON.parse(fetchedData ?? "{}");
 
   useEffect(() => {
     (async () => {
