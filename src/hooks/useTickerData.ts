@@ -1,18 +1,25 @@
 import { useFetch } from "@raycast/utils";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-// import { RectangleStats } from "../types/canvas";
-// import { renderChartImage } from "../helpers/chart";
-// import { createCanvas } from "canvas";
+import { useEffect, useState } from "react";
 
 export default function useTickerData(base: string) {
-  const [loading, setLoading] = useState<any>();
+  const [loading, setLoading] = useState<boolean>();
   const [marketCap, setMarketCap] = useState<any>();
   const [marketPrice, setMarketPrice] = useState<any>();
   const [marketRank, setMarketRank] = useState<any>();
-  const [name, setName] = useState<any>();
-  const [symbol, setSymbol] = useState<any>();
+  const [name, setName] = useState<string>();
+  const [symbol, setSymbol] = useState<string>();
   const [priceChangeIn1D, setPriceChangeIn1D] = useState();
+  const [coinId, setCoinId] = useState<string>();
+  const [chartUrl, setChartUrl] = useState<string>();
+
+  const {
+    data: fetchedData,
+    isLoading: fetchedLoading,
+    error: fetchedError,
+  } = useFetch<any>(
+    `https://elegant-phoenix-680f0e.netlify.app/.netlify/functions/ticker?base=${base}`
+  );
 
   useEffect(() => {
     (async () => {
@@ -65,6 +72,11 @@ export default function useTickerData(base: string) {
         setPriceChangeIn1D(
           price_change_percentage_24h_in_currency
         );
+        setCoinId(id);
+        if (fetchedData) {
+          const data = JSON.parse(fetchedData);
+          setChartUrl(data.file_url);
+        }
       } catch (e) {
         console.log("Some error fetching data", e);
       } finally {
@@ -81,5 +93,7 @@ export default function useTickerData(base: string) {
     marketRank,
     loading,
     priceChangeIn1D,
+    coinId,
+    chartUrl,
   };
 }

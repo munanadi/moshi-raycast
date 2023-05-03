@@ -1,20 +1,14 @@
 import {
-  Action,
-  ActionPanel,
-  List,
   showToast,
   Toast,
   LaunchProps,
   Detail,
-  useNavigation,
   popToRoot,
 } from "@raycast/api";
-import { getColorScale, parseTickerQuery } from "./helpers";
+import { parseTickerQuery } from "./helpers";
 import { useEffect } from "react";
-import { useFetch } from "@raycast/utils";
-import useTickerData from "./hooks/useTickerData";
-import NotCompare from "./components/NotCompare";
-import NotFiat from "./components/NotFiat";
+import CompareTicker from "./components/CompareTicker";
+import Ticker from "./components/Ticker";
 
 interface TickerArgs {
   base: string;
@@ -45,10 +39,10 @@ export default function Command(
   }, [base, target]);
 
   if (!isCompare) {
-    return <NotCompare base={base} />;
+    return <Ticker base={base} />;
   }
   if (!isFiat) {
-    return <NotFiat base={base} target={target} />;
+    return <CompareTicker base={base} target={target} />;
   }
   if (isFiat) {
     return <Detail markdown={`isFiat true`} />;

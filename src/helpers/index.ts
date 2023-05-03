@@ -1,5 +1,4 @@
 import { Color } from "@raycast/api";
-import fetch from "node-fetch";
 
 export function getColorScale(change: number): string {
   const c = Math.abs(change / 10);

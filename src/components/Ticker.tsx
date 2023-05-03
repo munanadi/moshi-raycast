@@ -1,7 +1,7 @@
 import { Detail } from "@raycast/api";
 import useTickerData from "../hooks/useTickerData";
 
-const NotCompare = (props: any) => {
+const Ticker = (props: any) => {
   const {
     marketCap,
     marketPrice,
@@ -9,10 +9,18 @@ const NotCompare = (props: any) => {
     name,
     marketRank,
     loading,
+    coinId,
+    chartUrl,
   } = useTickerData(props.base);
 
-  const markdown = `
-# ${name} ${symbol}
+  const markdown =
+    !name || !symbol
+      ? `# Fetching data...`
+      : !chartUrl
+      ? `# Trouble fetching chart...`
+      : `
+# ${name} (${symbol.toUpperCase()})
+<img alt="heatmap" height="345" src="${chartUrl}">
 `;
 
   return (
@@ -38,7 +46,7 @@ const NotCompare = (props: any) => {
           <Detail.Metadata.Separator />
           <Detail.Metadata.Link
             title="View in Coingecko"
-            target={`https://www.coingecko.com/en/coins/${name?.toLowerCase()}`}
+            target={`https://www.coingecko.com/en/coins/${coinId?.toLowerCase()}`}
             text="Link"
           />
         </Detail.Metadata>
@@ -47,4 +55,4 @@ const NotCompare = (props: any) => {
   );
 };
 
-export default NotCompare;
+export default Ticker;

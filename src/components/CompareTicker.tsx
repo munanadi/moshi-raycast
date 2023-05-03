@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Suggest from "./Suggest";
 
-const NotFiat = ({
+const CompareTicker = ({
   base,
   target,
 }: {
@@ -114,4 +114,4 @@ const NotFiat = ({
   );
 };
 
-export default NotFiat;
+export default CompareTicker;
