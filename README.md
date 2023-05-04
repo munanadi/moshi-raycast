@@ -9,46 +9,55 @@ A raycast extension that lets you
 5. convert between tokens
 6. see information about your favourite tokens
 
-### Commands
-
-#### 1. heatmap
-
-Shows the market in a heatmap
-[](./demos/heatmap.mov)
-
-#### 2. watchlist
-
-Shows the tokens overview in your watchlist
-
-#### 3. ticker
-
-Show details about a given ticker
-
-#### 4. convert
-
-Convert $value between different tokens
-
 ---
 
-### Tech Used
+## Tech Used
 
 1. [Serverless functions](https://github.com/munanadi/ntl-moshi-chart) are used to render charts as we cannot render chart primitives from within the Raycast extension.
 
 2. [Mochi's APIs](https://mochibot.gitbook.io/mochi-bot/functions/mochi-apis/crypto-management) from their docs to call various end points
 
-3.
+## Commands
 
----
+### 1. heatmap
 
-#### Coin Gecko APIs are used to fetch data
+Shows the market in a heatmap
+![](./demos/heatmap.gif)
 
-`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc`
+### 2. watchlist
 
----
+Shows the tokens overview in your watchlist
+![](./demos/watchlist.gif)
 
-1. Doesnt' let me add or compile `node-canvas` throws
+### 3. ticker
 
-```
-build failed (node_modules/canvas/lib/bindings.js:3:25 const bindings = require('../build/Release/canvas.node')): native bindings (e.g., .node files) are not supported because they are neither cross-platform nor cross-architecture; for example, native bindings built on a M1 mac would not work on an Intel mac
-event -  stopped development mode
-```
+Show details about a given ticker
+![](./demos/ticker-sol.gif)
+
+base/target
+![](./demos/ticker-sol-eth.gif.gif)
+
+### 4. convert
+
+Convert $value between different tokens
+![](./demos/convert.gif)
+
+### 5. gainers/losers
+
+Show the top 5 gainers/ losers in 1D
+![](./demos/gainers-losers.gif)
+
+### 6. Trending
+
+Show the top trendings tokens in 1D
+![](./demos/trending.gif)
+
+### 7. Coin Gecko tokens
+
+List of all Coin Gecko tokens
+![](./demos/cg-tokens.gif)
+
+### 8. Market Data
+
+Market data from Moshi API
+![](./demos/market-data.gif)
