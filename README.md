@@ -17,6 +17,8 @@ A raycast extension that lets you
 
 2. [Mochi's APIs](https://mochibot.gitbook.io/mochi-bot/functions/mochi-apis/crypto-management) from their docs to call various end points
 
+---
+
 ## Commands
 
 ### 1. heatmap
@@ -24,10 +26,14 @@ A raycast extension that lets you
 Shows the market in a heatmap
 ![](./demos/heatmap.gif)
 
+---
+
 ### 2. watchlist
 
 Shows the tokens overview in your watchlist
 ![](./demos/watchlist.gif)
+
+---
 
 ### 3. ticker
 
@@ -35,29 +41,41 @@ Show details about a given ticker
 ![](./demos/ticker-sol.gif)
 
 base/target
-![](./demos/ticker-sol-eth.gif.gif)
+![](./demos/ticker-sol-eth.gif)
+
+---
 
 ### 4. convert
 
 Convert $value between different tokens
 ![](./demos/convert.gif)
 
+---
+
 ### 5. gainers/losers
 
 Show the top 5 gainers/ losers in 1D
 ![](./demos/gainers-losers.gif)
+
+---
 
 ### 6. Trending
 
 Show the top trendings tokens in 1D
 ![](./demos/trending.gif)
 
+---
+
 ### 7. Coin Gecko tokens
 
 List of all Coin Gecko tokens
 ![](./demos/cg-tokens.gif)
 
+---
+
 ### 8. Market Data
 
 Market data from Moshi API
 ![](./demos/market-data.gif)
+
+---
