@@ -23,7 +23,7 @@ export default function Command(
     parseTickerQuery(enteredArg);
 
   useEffect(() => {
-    async () => {
+    (async () => {
       if (base === target) {
         // This comparison cannot happen
         await showToast({
@@ -35,20 +35,18 @@ export default function Command(
           clearSearchBar: false,
         });
       }
-    };
+    })();
   }, [base, target]);
 
   if (!isCompare) {
     return <Ticker base={base} />;
-  }
-  if (!isFiat) {
+  } else if (!isFiat) {
     return <CompareTicker base={base} target={target} />;
+  } else {
+    return (
+      <Detail
+        markdown={`This is used to show comparisoin between fiat tokens`}
+      />
+    );
   }
-  if (isFiat) {
-    return <Detail markdown={`isFiat true`} />;
-  }
-
-  return (
-    <Detail markdown={`Hello you have entered ${base}`} />
-  );
 }
