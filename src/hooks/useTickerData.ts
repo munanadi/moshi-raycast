@@ -1,6 +1,5 @@
-import { useFetch } from "@raycast/utils";
-import axios from "axios";
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function useTickerData(base: string) {
   const [loading, setLoading] = useState<boolean>();
@@ -12,14 +11,6 @@ export default function useTickerData(base: string) {
   const [priceChangeIn1D, setPriceChangeIn1D] = useState();
   const [coinId, setCoinId] = useState<string>();
   const [chartUrl, setChartUrl] = useState<string>();
-
-  const {
-    data: fetchedData,
-    isLoading: fetchedLoading,
-    error: fetchedError,
-  } = useFetch<any>(
-    `https://elegant-phoenix-680f0e.netlify.app/.netlify/functions/ticker?base=${base}`
-  );
 
   useEffect(() => {
     (async () => {
@@ -63,6 +54,10 @@ export default function useTickerData(base: string) {
         const marketCap = +market_cap[currency];
 
         // draw chart
+        const chartData = await axios.get(
+          `https://elegant-phoenix-680f0e.netlify.app/.netlify/functions/ticker?base=${base}`
+        );
+        const fetchedData = await chartData.data;
 
         setMarketCap(marketCap.toLocaleString());
         setMarketPrice(currentPrice);
@@ -74,8 +69,7 @@ export default function useTickerData(base: string) {
         );
         setCoinId(id);
         if (fetchedData) {
-          const data = JSON.parse(fetchedData);
-          setChartUrl(data.file_url);
+          setChartUrl(fetchedData.file_url);
         }
       } catch (e) {
         console.log("Some error fetching data", e);
