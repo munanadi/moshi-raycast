@@ -1,12 +1,20 @@
-# mochi-raycast
+# Mochi Raycast Extension
 
-Raycast for Mochi
+A raycast extension that lets you
+
+1. get overall market information
+2. fetch gainers/losers tokens
+3. see trending tokens
+4. peeks at your wathclist
+5. convert between tokens
+6. see information about your favourite tokens
 
 ### Commands
 
 #### 1. heatmap
 
 Shows the market in a heatmap
+[](./demos/heatmap.mov)
 
 #### 2. watchlist
 
@@ -24,7 +32,11 @@ Convert $value between different tokens
 
 ### Tech Used
 
-Serverless functions are used to render charts as we cannot render chart primitives from within the Raycast extension.
+1. [Serverless functions](https://github.com/munanadi/ntl-moshi-chart) are used to render charts as we cannot render chart primitives from within the Raycast extension.
+
+2. [Mochi's APIs](https://mochibot.gitbook.io/mochi-bot/functions/mochi-apis/crypto-management) from their docs to call various end points
+
+3.
 
 ---
 
