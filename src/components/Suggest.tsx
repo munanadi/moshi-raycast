@@ -33,6 +33,7 @@ export default function Suggest({
           </ActionPanel>
         }
       >
+        <Form.Description text="Found Multiple Options, Pick One." />
         <Form.Dropdown
           id={title}
           title={prompt}

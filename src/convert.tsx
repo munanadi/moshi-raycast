@@ -23,8 +23,6 @@ const Command = (
     to: target,
   } = props.arguments;
 
-  const [suggest, setSuggest] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(false);
   const [baseCoinSuggestions, setBaseCoinSuggestions] =
     useState<any>();
   const [targetCoinSuggestions, setTargetCoinSuggestions] =
@@ -38,8 +36,6 @@ const Command = (
 
   useEffect(() => {
     (async () => {
-      setSuggest(false);
-      setLoading(true);
       const compare = await axios.get(
         `https://api.mochi.pod.town/api/v1/defi/coins/compare?base=${
           selectedBase ?? base
@@ -55,14 +51,10 @@ const Command = (
       // multiple resutls found
       // Push a new picker page to pick which coin.
       if (!selectedBase || !selectedTarget) {
-        setLoading(false);
-        setSuggest(true);
         setBaseCoinSuggestions(base_coin_suggestions);
         setTargetCoinSuggestions(target_coin_suggestions);
         return;
       }
-
-      setLoading(false);
 
       const { ratios } = compareData;
 
@@ -71,25 +63,27 @@ const Command = (
     })();
   }, [base, target, selectedBase, selectedTarget]);
 
-  return !suggest ? (
+  return selectedBase && selectedTarget && currentRatio ? (
     <Detail
-      isLoading={loading}
-      markdown={`${base} ${target} inputs
-      ${amount} ${base} = ${parseFloat(
+      markdown={`# ${amount} ${base?.toUpperCase()} = ${parseFloat(
         (
           parseFloat(amount) *
           parseFloat(currentRatio ?? "1")
         ).toString()
       )
         .toFixed(4)
-        .toString()} ${target}`}
+        .toString()} ${target?.toUpperCase()}`}
+    />
+  ) : selectedBase && selectedTarget && !currentRatio ? (
+    <Detail
+      isLoading={true}
+      markdown={`# Fetching data for ${base?.toUpperCase()} / ${target?.toUpperCase()}...`}
     />
   ) : (
     <Detail
-      isLoading={loading}
-      markdown={
-        "Found multiple base options. Select Please?"
-      }
+      markdown={`# Found multiple ${
+        selectedBase ? "target" : "base"
+      } options. Select Please?`}
       actions={
         <ActionPanel>
           {!selectedBase && (

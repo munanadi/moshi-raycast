@@ -108,6 +108,7 @@ const CompareTicker = ({
     />
   ) : selectedBase && selectedTarget && !data ? (
     <Detail
+      isLoading={true}
       markdown={`# Fetching data for ${base} / ${target}...`}
     />
   ) : (

@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { LocalStorage, Clipboard } from "@raycast/api";
 // TODO: Fetch tokens here instead of reading from local file
-// import tokenData from "../data/tokens.json";
-import tokenData from "../data/cg-tokens.json";
+import tokenData from "../data/tokens.json";
+// import tokenData from "../data/cg-tokens.json";
 
 interface tokenData {
   id: "string";
@@ -26,7 +26,7 @@ function useTokens() {
     const tokenMap: any = {};
 
     // tokenData.data.data.forEach((token) => {
-    tokenData.forEach((token) => {
+    tokenData.data.data.forEach((token) => {
       tokenMap[token.name] = {
         ...token,
       };

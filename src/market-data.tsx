@@ -24,7 +24,6 @@ export default function Command() {
                 icon={coin.image}
                 detail={
                   <List.Item.Detail
-                    markdown={"Image goes here"}
                     metadata={
                       <List.Item.Detail.Metadata>
                         <List.Item.Detail.Metadata.Label

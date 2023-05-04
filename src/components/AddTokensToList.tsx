@@ -14,7 +14,7 @@ import { Icon } from "@raycast/api";
 import useLocalStorage from "../hooks/useLocalStorage";
 
 export default function AddTokensToList() {
-  const [searchText, setSearchText] = useState("");
+  const [searchText, setSearchText] = useState<any>("");
   const [tokensArr, setTokensArr] = useState<any>();
   const [loading, setLoading] = useState<boolean>();
 
@@ -68,7 +68,9 @@ export default function AddTokensToList() {
               <Action
                 title="Add to Favourites"
                 onAction={async () => {
-                  await storeData(token.symbol.toLowerCase());
+                  await storeData(
+                    token.symbol.toLowerCase()
+                  );
                 }}
               />
             </ActionPanel>

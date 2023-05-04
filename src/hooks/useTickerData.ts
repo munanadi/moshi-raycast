@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-export default function useTickerData(base: string) {
+export default function useTickerData(
+  base: string | undefined
+) {
   const [loading, setLoading] = useState<boolean>();
   const [marketCap, setMarketCap] = useState<any>();
   const [marketPrice, setMarketPrice] = useState<any>();
@@ -14,27 +16,17 @@ export default function useTickerData(base: string) {
 
   useEffect(() => {
     (async () => {
+      if (!base) return;
       try {
         setLoading(true);
-        // console.log({ base });
         // Search coins
         const coinsList = await axios.get(
           `https://api.mochi.pod.town/api/v1/defi/coins?query=${base}`
         );
 
         const coinsListData = await coinsList.data;
-        // console.log(coinsListData);
 
-        if (!coinsListData.data.length) {
-          // No Tokens like this exists
-          console.log("handle right here");
-          return;
-        }
-
-        // Show the ticker response here -> coinId, days = 1day, symbol
-        // TODO: Show options if more than one choice exists in a drop down
-        // Contiunue wiht the first response
-
+        // coinListData.data will be of one entry only, suggestions already handled
         const { id, symbol, name } = coinsListData.data[0];
         const ticker = await axios.get(
           `https://api.mochi.pod.town/api/v1/defi/coins/${id}`

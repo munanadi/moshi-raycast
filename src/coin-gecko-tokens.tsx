@@ -1,16 +1,7 @@
-import {
-  Action,
-  ActionPanel,
-  Detail,
-  List,
-  Image,
-  Icon,
-  Grid,
-} from "@raycast/api";
+import { Action, ActionPanel, List } from "@raycast/api";
 import { usePromise } from "@raycast/utils";
-import axios from "axios";
 import coinData from "./data/cg-tokens.json";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 
 interface CoinGeckoCoin {
   name: string;
@@ -42,6 +33,18 @@ export default function Command() {
           title={coin.name}
           key={coin.id}
           subtitle={coin.symbol}
+          actions={
+            <ActionPanel>
+              <Action.CopyToClipboard
+                content={coin.id}
+                title="Copy CoinID"
+              />
+              <Action.OpenInBrowser
+                title="View in CoinGecko"
+                url={`https://www.coingecko.com/en/coins/${coin.id}`}
+              />
+            </ActionPanel>
+          }
         />
       ))}
     </List>
